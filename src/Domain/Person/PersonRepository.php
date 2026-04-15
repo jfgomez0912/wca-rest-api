@@ -51,10 +51,17 @@ readonly class PersonRepository
         );
 
         $personIds = array_column($results, 'wca_id');
-        $competitionIdsMap = $this->competitionRepository->findCompetitionIdsByPersons($personIds);
-        $ranksMap = $this->rankRepository->findByPersons($personIds);
-        $resultsMap = $this->resultRepository->findByPersons($personIds);
-        $championshipIdsMap = $this->championshipRepository->findChampionshipIdsByPersons($personIds);
+        $competitionIdsMap = [];
+        $ranksMap = [];
+        $resultsMap = [];
+        $championshipIdsMap = [];
+
+        foreach (array_chunk($personIds, 50) as $chunk) {
+            $competitionIdsMap += $this->competitionRepository->findCompetitionIdsByPersons($chunk);
+            $ranksMap += $this->rankRepository->findByPersons($chunk);
+            $resultsMap += $this->resultRepository->findByPersons($chunk);
+            $championshipIdsMap += $this->championshipRepository->findChampionshipIdsByPersons($chunk);
+        }
 
         foreach ($results as $result) {
             $wcaId = $result['wca_id'];
