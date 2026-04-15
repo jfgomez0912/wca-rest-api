@@ -85,14 +85,6 @@ jobs:
           else
              echo "No new version detected, exiting, bye."
           fi
-      - name: Commit version date to master
-        run: |
-          git config --global user.name 'robiningelbrecht'
-          git config --global user.email 'robiningelbrecht@users.noreply.github.com'
-          git add README.md docs/openapi.yml
-          git diff --staged --quiet || git commit -m "Update version date"
-          git push
-
       - name: Backup current v1 branch
         run: |
           if git ls-remote --exit-code origin v1 > /dev/null 2>&1; then
@@ -109,3 +101,11 @@ jobs:
           publish_branch: v1
           destination_dir: v1
           force_orphan: true
+
+      - name: Commit version date to master
+        run: |
+          git config --global user.name 'robiningelbrecht'
+          git config --global user.email 'robiningelbrecht@users.noreply.github.com'
+          git add README.md docs/openapi.yml
+          git diff --staged --quiet || git commit -m "Update version date"
+          git push
