@@ -43,7 +43,7 @@ jobs:
           
           # Check if there's a new version
           NEW_VERSION=$(curl -s -L https://www.worldcubeassociation.org/api/v0/export/public)
-          CURRENT_VERSION=$(curl -s -f -L https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/api/api/version.json || echo "")
+          CURRENT_VERSION=$(curl -s -f -L https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/api/v1/version.json || echo "")
           
           echo $NEW_VERSION
           echo $CURRENT_VERSION
@@ -99,5 +99,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./api
           publish_branch: api
-          destination_dir: api
+          destination_dir: v1
           force_orphan: true
