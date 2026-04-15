@@ -63,7 +63,7 @@ externalDocs:
   description: The source code of the API
   url: https://github.com/robiningelbrecht/wca-rest-api
 servers:
-  - url: https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/master
+  - url: https://wca-api.robiningelbrecht.be/v1
 x-tagGroups:
   - name: API
     tags:
