@@ -43,7 +43,7 @@ jobs:
           
           # Check if there's a new version
           NEW_VERSION=$(curl -s -L https://www.worldcubeassociation.org/api/v0/export/public)
-          CURRENT_VERSION=$(curl -s -f -L https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/api/v1/version.json || echo "")
+          CURRENT_VERSION=$(curl -s -f -L https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/v1/v1/version.json || echo "")
           
           echo $NEW_VERSION
           echo $CURRENT_VERSION
@@ -85,12 +85,12 @@ jobs:
           else
              echo "No new version detected, exiting, bye."
           fi
-      - name: Backup current api branch
+      - name: Backup current v1 branch
         run: |
-          if git ls-remote --exit-code origin api > /dev/null 2>&1; then
-            git push origin origin/api:refs/heads/api-backup --force
+          if git ls-remote --exit-code origin v1 > /dev/null 2>&1; then
+            git push origin origin/v1:refs/heads/v1-backup --force
           else
-            echo "No existing api branch, skipping backup."
+            echo "No existing v1 branch, skipping backup."
           fi
 
       - name: Deploy API to gh-pages
@@ -98,6 +98,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./api
-          publish_branch: api
+          publish_branch: v1
           destination_dir: v1
           force_orphan: true
