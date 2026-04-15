@@ -105,4 +105,67 @@ readonly class RankRepository
             countryRank: $result['country_rank'],
         ), $results);
     }
+
+    /**
+     * @param string[] $personIds
+     *
+     * @return array<string, Rank[]>
+     */
+    public function findByPersons(array $personIds): array
+    {
+        if (empty($personIds)) {
+            return [];
+        }
+
+        $query = '
+            SELECT *, "average" as rankType
+            FROM ranks_average
+            WHERE person_id IN (?)
+            UNION ALL
+            SELECT *, "single" as rankType
+            FROM ranks_single
+            WHERE person_id IN (?)
+        ';
+
+        $results = $this->connection->executeQuery(
+            $query,
+            [$personIds, $personIds],
+            [Connection::PARAM_STR_ARRAY, Connection::PARAM_STR_ARRAY]
+        )->fetchAllAssociative();
+
+        /** @var array<string, Rank[]> $map */
+        $map = [];
+        foreach ($results as $result) {
+            $map[(string) $result['person_id']][] = Rank::fromState(
+                rankType: RankType::from($result['rankType']),
+                personId: $result['person_id'],
+                eventId: $result['event_id'],
+                best: $result['best'],
+                worldRank: $result['world_rank'],
+                continentRank: $result['continent_rank'],
+                countryRank: $result['country_rank'],
+            );
+        }
+
+        return $map;
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function findAllForEvent(RankType $rankType, string $eventId): array
+    {
+        $table = RankType::SINGLE === $rankType ? 'ranks_single' : 'ranks_average';
+
+        $query = sprintf(
+            'SELECT r.*, c.iso2, c.continent_id
+            FROM %s r
+            INNER JOIN persons p ON r.person_id = p.wca_id
+            INNER JOIN countries c ON p.country_id = c.id
+            WHERE r.event_id = ?',
+            $table
+        );
+
+        return $this->connection->executeQuery($query, [$eventId])->fetchAllAssociative();
+    }
 }

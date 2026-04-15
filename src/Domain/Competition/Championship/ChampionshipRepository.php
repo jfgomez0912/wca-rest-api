@@ -74,6 +74,40 @@ readonly class ChampionshipRepository
     }
 
     /**
+     * @param string[] $personIds
+     *
+     * @return array<string, string[]>
+     */
+    public function findChampionshipIdsByPersons(array $personIds): array
+    {
+        if (empty($personIds)) {
+            return [];
+        }
+
+        $query = '
+            SELECT r.person_id, champ.competition_id
+            FROM championships champ
+            INNER JOIN results r ON champ.competition_id = r.competition_id
+            WHERE r.person_id IN (?)
+            GROUP BY r.person_id, champ.competition_id
+        ';
+
+        $rows = $this->connection->executeQuery(
+            $query,
+            [$personIds],
+            [Connection::PARAM_STR_ARRAY]
+        )->fetchAllAssociative();
+
+        /** @var array<string, string[]> $map */
+        $map = [];
+        foreach ($rows as $row) {
+            $map[(string) $row['person_id']][] = (string) $row['competition_id'];
+        }
+
+        return $map;
+    }
+
+    /**
      * @param array<mixed> $result
      */
     private function buildResult(array $result): Championship

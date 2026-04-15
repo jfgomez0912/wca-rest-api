@@ -17,14 +17,13 @@ readonly class ContinentRepository
     {
         $queryBuilder = $this->connection->createQueryBuilder();
 
-        $queryBuilder->select('SQL_CALC_FOUND_ROWS *')
+        $queryBuilder->select('*')
             ->from('continents', 'c')
             ->orderBy('id', 'ASC');
 
         $results = $queryBuilder->executeQuery()->fetchAllAssociative();
-        $total = $this->connection->executeQuery('SELECT FOUND_ROWS() as total;')->fetchOne();
 
-        $overview = Overview::empty(Pagination::default(), $total);
+        $overview = Overview::empty(Pagination::default(), count($results));
         foreach ($results as $result) {
             $overview->addItem(Continent::fromState(
                 $result['id'],

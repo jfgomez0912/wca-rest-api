@@ -101,6 +101,39 @@ readonly class CompetitionRepository
         ])->fetchFirstColumn();
     }
 
+    /**
+     * @param string[] $personIds
+     *
+     * @return array<string, string[]>
+     */
+    public function findCompetitionIdsByPersons(array $personIds): array
+    {
+        if (empty($personIds)) {
+            return [];
+        }
+
+        $query = '
+            SELECT person_id, competition_id
+            FROM results
+            WHERE person_id IN (?)
+            GROUP BY person_id, competition_id
+        ';
+
+        $rows = $this->connection->executeQuery(
+            $query,
+            [$personIds],
+            [Connection::PARAM_STR_ARRAY]
+        )->fetchAllAssociative();
+
+        /** @var array<string, string[]> $map */
+        $map = [];
+        foreach ($rows as $row) {
+            $map[(string) $row['person_id']][] = (string) $row['competition_id'];
+        }
+
+        return $map;
+    }
+
     public function countUniqueCompetitionDays(): int
     {
         $query = "

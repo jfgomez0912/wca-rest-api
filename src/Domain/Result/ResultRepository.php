@@ -92,6 +92,46 @@ readonly class ResultRepository
     }
 
     /**
+     * @param string[] $personIds
+     *
+     * @return array<string, Result[]>
+     */
+    public function findByPersons(array $personIds): array
+    {
+        if (empty($personIds)) {
+            return [];
+        }
+
+        $query = '
+            SELECT r.*, rt.name as roundName, rt.final as isFinalRound, f.name as formatName
+            FROM results r
+            INNER JOIN round_types rt ON r.round_type_id = rt.id
+            INNER JOIN formats f ON r.format_id = f.id
+            INNER JOIN competitions c ON r.competition_id = c.id
+            INNER JOIN events e ON r.event_id = e.id
+            WHERE r.person_id IN (?)
+            ORDER BY r.person_id, c.year DESC, c.month DESC, c.day DESC, e.rank ASC, rt.rank DESC
+        ';
+
+        $results = $this->connection->executeQuery(
+            $query,
+            [$personIds],
+            [Connection::PARAM_STR_ARRAY]
+        )->fetchAllAssociative();
+
+        $attemptsMap = $this->fetchAttemptsForResults($results);
+
+        /** @var array<string, Result[]> $map */
+        $map = [];
+        foreach ($results as $result) {
+            $solves = $attemptsMap[$result['id']] ?? [];
+            $map[(string) $result['person_id']][] = $this->buildResult($result, $solves);
+        }
+
+        return $map;
+    }
+
+    /**
      * Batch-fetch all attempts for a set of results, grouped by result_id.
      *
      * @param array<mixed> $results
@@ -129,7 +169,7 @@ readonly class ResultRepository
 
     /**
      * @param array<mixed> $result
-     * @param int[] $solves
+     * @param int[]        $solves
      */
     private function buildResult(array $result, array $solves): Result
     {

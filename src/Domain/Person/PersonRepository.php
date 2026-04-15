@@ -50,15 +50,22 @@ readonly class PersonRepository
             $total
         );
 
+        $personIds = array_column($results, 'wca_id');
+        $competitionIdsMap = $this->competitionRepository->findCompetitionIdsByPersons($personIds);
+        $ranksMap = $this->rankRepository->findByPersons($personIds);
+        $resultsMap = $this->resultRepository->findByPersons($personIds);
+        $championshipIdsMap = $this->championshipRepository->findChampionshipIdsByPersons($personIds);
+
         foreach ($results as $result) {
+            $wcaId = $result['wca_id'];
             $overview->addItem(Person::fromState(
-                id: $result['wca_id'],
+                id: $wcaId,
                 name: $result['name'],
                 country: Iso2Code::fromString($result['iso2']),
-                competitionIds: $this->competitionRepository->findCompetitionIdsByPerson($result['wca_id']),
-                ranks: $this->rankRepository->findByPerson($result['wca_id']),
-                results: $this->resultRepository->findByPerson($result['wca_id']),
-                championshipIds: $this->championshipRepository->findChampionshipIdsByPerson($result['wca_id']),
+                competitionIds: $competitionIdsMap[$wcaId] ?? [],
+                ranks: $ranksMap[$wcaId] ?? [],
+                results: $resultsMap[$wcaId] ?? [],
+                championshipIds: $championshipIdsMap[$wcaId] ?? [],
             ));
         }
 

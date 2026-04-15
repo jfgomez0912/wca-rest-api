@@ -67,16 +67,18 @@ jobs:
             mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca < wca-export/WCA_export.sql
             
             # Add indexes for faster processing
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX wca_id_index ON persons (wca_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX person_id_index ON results (person_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX competition_id_index ON results (competition_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX event_id_index ON results (event_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX competition_id_index ON championships (competition_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX person_id_index ON ranks_single (person_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX event_id_index ON ranks_single (event_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX person_id_index ON ranks_average (person_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX event_id_index ON ranks_average (event_id)"
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "CREATE INDEX result_id_index ON result_attempts (result_id)"
+            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "
+              CREATE INDEX wca_id_index ON persons (wca_id);
+              CREATE INDEX person_id_competition_id_index ON results (person_id, competition_id);
+              CREATE INDEX competition_id_index ON results (competition_id);
+              CREATE INDEX event_id_index ON results (event_id);
+              CREATE INDEX competition_id_index ON championships (competition_id);
+              CREATE INDEX person_id_index ON ranks_single (person_id);
+              CREATE INDEX event_id_index ON ranks_single (event_id);
+              CREATE INDEX person_id_index ON ranks_average (person_id);
+              CREATE INDEX event_id_index ON ranks_average (event_id);
+              CREATE INDEX result_id_attempt_index ON result_attempts (result_id, attempt_number);
+            "
             
             # Build API.
             bin/console app:api:build "continent,country,event,competition,championship,person,rank,result,version"
@@ -99,11 +101,3 @@ jobs:
           publish_branch: api
           destination_dir: api
           force_orphan: true
-      - name: ntfy.sh
-        uses: robiningelbrecht/ntfy-action@v1.0.0
-        if: always()
-        with:
-            url: ${{ secrets.NTFY_URL }}
-            topic: ${{ secrets.NTFY_TOPIC }}
-            icon: 'https://github.githubassets.com/images/modules/profile/achievements/starstruck-default.png'
-            job_status: ${{ job.status }}

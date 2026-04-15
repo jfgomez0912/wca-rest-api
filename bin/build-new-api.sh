@@ -38,16 +38,18 @@ tail -n +2 wca-export/WCA_export.sql > wca-export/tmp.sql && mv wca-export/tmp.s
 mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca < wca-export/WCA_export.sql
 
 # Add indexes for faster processing
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX wca_id_index ON persons (wca_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX person_id_index ON results (person_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX competition_id_index ON results (competition_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX event_id_index ON results (event_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX competition_id_index ON championships (competition_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX person_id_index ON ranks_single (person_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX event_id_index ON ranks_single (event_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX person_id_index ON ranks_average (person_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX event_id_index ON ranks_average (event_id)"
-mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "CREATE INDEX result_id_index ON result_attempts (result_id)"
+mysql --host="mysql" --user=root --password=root --port=3306 --skip-ssl wca -e "
+  CREATE INDEX wca_id_index ON persons (wca_id);
+  CREATE INDEX person_id_competition_id_index ON results (person_id, competition_id);
+  CREATE INDEX competition_id_index ON results (competition_id);
+  CREATE INDEX event_id_index ON results (event_id);
+  CREATE INDEX competition_id_index ON championships (competition_id);
+  CREATE INDEX person_id_index ON ranks_single (person_id);
+  CREATE INDEX event_id_index ON ranks_single (event_id);
+  CREATE INDEX person_id_index ON ranks_average (person_id);
+  CREATE INDEX event_id_index ON ranks_average (event_id);
+  CREATE INDEX result_id_attempt_index ON result_attempts (result_id, attempt_number);
+"
 
 # Build API.
 bin/console app:api:build $APIS_TO_REBUILD
