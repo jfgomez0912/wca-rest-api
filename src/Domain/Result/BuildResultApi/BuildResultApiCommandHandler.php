@@ -4,10 +4,12 @@ namespace App\Domain\Result\BuildResultApi;
 
 use App\Domain\Competition\CompetitionRepository;
 use App\Domain\FileWriter;
+use App\Domain\Result\Result;
 use App\Domain\Result\ResultRepository;
 use App\Infrastructure\Attribute\AsCommandHandler;
 use App\Infrastructure\CQRS\CommandHandler\CommandHandler;
 use App\Infrastructure\CQRS\DomainCommand;
+use App\Infrastructure\Overview\Overview;
 use App\Infrastructure\Overview\Pagination;
 use App\Infrastructure\Serialization\Json;
 
@@ -37,41 +39,41 @@ readonly class BuildResultApiCommandHandler implements CommandHandler
 
             /** @var \App\Domain\Competition\Competition $competition */
             foreach ($competitions->getItems() as $competition) {
-                if ($this->apiFileWriter->fileExists(sprintf('results/%s.json', $competition->getId()))) {
-                    // Results for a comp should never change, they are final
-                    // So we only need to fetch and write the ones that are not in the API yet.
-                    // We can do this by checking if the file exists.
-                    $progressBar->advance();
-                    continue;
-                }
-                $overview = $this->resultRepository->findOneBy(
+                $allResults = $this->resultRepository->findOneBy(
                     $competition->getId()
                 );
 
-                if ($overview->isEmpty()) {
+                if ($allResults->isEmpty()) {
+                    $progressBar->advance();
                     continue;
                 }
 
                 $this->apiFileWriter->write(
                     sprintf('results/%s', $competition->getId()),
-                    Json::encode($overview)
+                    Json::encode($allResults)
                 );
 
-                foreach ($competition->getEvents() as $eventId) {
-                    $overview = $this->resultRepository->findOneBy(
-                        $competition->getId(),
-                        $eventId
+                /** @var array<string, Result[]> $byEvent */
+                $byEvent = [];
+                /** @var Result $result */
+                foreach ($allResults->getItems() as $result) {
+                    $byEvent[$result->getEventId()][] = $result;
+                }
+
+                foreach ($byEvent as $eventId => $eventResults) {
+                    $eventOverview = Overview::empty(
+                        Pagination::fromPageNumberAndSize(1, count($eventResults)),
+                        count($eventResults)
                     );
-
-                    if ($overview->isEmpty()) {
-                        continue;
+                    foreach ($eventResults as $result) {
+                        $eventOverview->addItem($result);
                     }
-
                     $this->apiFileWriter->write(
                         sprintf('results/%s/%s', $competition->getId(), $eventId),
-                        Json::encode($overview)
+                        Json::encode($eventOverview)
                     );
                 }
+
                 $progressBar->advance();
             }
 
