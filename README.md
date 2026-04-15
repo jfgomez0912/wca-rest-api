@@ -41,7 +41,7 @@ I'm in no way affiliated with or part of the official WCA software team.
 ## Getting started
 
 The full documentation and specs are available at
-[https://wca-rest-api.robiningelbrecht.be/](https://wca-rest-api.robiningelbrecht.be/)
+[https://wca-api-docs.robiningelbrecht.be/](https://wca-api-docs.robiningelbrecht.be/)
 
 ## Feedback
 
