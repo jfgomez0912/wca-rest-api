@@ -88,6 +88,7 @@ jobs:
       - name: Backup current v1 branch
         run: |
           if git ls-remote --exit-code origin v1 > /dev/null 2>&1; then
+            git fetch origin v1
             git push origin origin/v1:refs/heads/v1-backup --force
           else
             echo "No existing v1 branch, skipping backup."
