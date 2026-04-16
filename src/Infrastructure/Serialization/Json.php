@@ -6,6 +6,9 @@ use Safe\Exceptions\JsonException;
 
 class Json
 {
+    /**
+     * @param positive-int $depth
+     */
     public static function encode(mixed $value, int $options = 0, int $depth = 512): string
     {
         try {
