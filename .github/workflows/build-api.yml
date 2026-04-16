@@ -15,6 +15,18 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+          -e MYSQL_ROOT_PASSWORD=root
+          --command="
+          --innodb-flush-log-at-trx-commit=0
+          --innodb-doublewrite=0
+          --innodb-buffer-pool-size=512M
+          --skip-log-bin
+          "
 
     steps:
       # https://github.com/marketplace/actions/setup-php-action
@@ -31,8 +43,8 @@ jobs:
       - name: Copy .env file
         run: cp .env.github-actions .env
 
-      - name: Wait for services to boot
-        run: sleep 10
+      - name: Wait for MySQL
+        run: until mysqladmin ping -h 127.0.0.1 --port=3306 -u root --password=root --silent; do sleep 2; done
 
       - name: Install dependencies
         run: composer install --prefer-dist
@@ -63,8 +75,12 @@ jobs:
             echo "Importing WCA export to database..."
             # We need to remove the first line from the import file, because it causes MySQL to crash during import
             tail -n +2 wca-export/WCA_export.sql > wca-export/tmp.sql && mv wca-export/tmp.sql wca-export/WCA_export.sql
-            # Now import
-            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca < wca-export/WCA_export.sql
+            # Import with optimizations for bulk loading
+            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca \
+              -e "SET GLOBAL foreign_key_checks=0; SET GLOBAL unique_checks=0;"
+            mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca \
+              --init-command="SET foreign_key_checks=0; SET unique_checks=0; SET autocommit=0; SET sql_log_bin=0;" \
+              < wca-export/WCA_export.sql
             
             # Add indexes for faster processing
             mysql --host="127.0.0.1" --port=3306 --user=root --password=root wca -e "
@@ -94,18 +110,13 @@ jobs:
             echo "No existing v1 branch, skipping backup."
           fi
 
-      - name: Prepare deploy directory
-        run: |
-          mkdir -p _site/v1
-          cp -r docs/* _site/
-          cp -r api/* _site/v1/
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy API to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          publish_dir: ./api
           publish_branch: v1
+          destination_dir: v1
           force_orphan: true
 
       - name: Commit version date to master
