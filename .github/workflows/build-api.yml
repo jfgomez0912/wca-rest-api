@@ -20,13 +20,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-          -e MYSQL_ROOT_PASSWORD=root
-          --command="
-          --innodb-flush-log-at-trx-commit=0
-          --innodb-doublewrite=0
-          --innodb-buffer-pool-size=512M
-          --skip-log-bin
-          "
 
     steps:
       # https://github.com/marketplace/actions/setup-php-action
@@ -45,6 +38,14 @@ jobs:
 
       - name: Wait for MySQL
         run: until mysqladmin ping -h 127.0.0.1 --port=3306 -u root --password=root --silent; do sleep 2; done
+
+      - name: Tune MySQL for bulk import
+        run: |
+          mysql --host="127.0.0.1" --port=3306 --user=root --password=root -e "
+            SET GLOBAL innodb_flush_log_at_trx_commit=0;
+            SET GLOBAL innodb_doublewrite=0;
+            SET GLOBAL innodb_buffer_pool_size=536870912;
+          "
 
       - name: Install dependencies
         run: composer install --prefer-dist
