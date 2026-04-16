@@ -93,13 +93,18 @@ jobs:
             echo "No existing v1 branch, skipping backup."
           fi
 
-      - name: Deploy API to gh-pages
+      - name: Prepare deploy directory
+        run: |
+          mkdir -p _site/v1
+          cp -r docs/* _site/
+          cp -r api/* _site/v1/
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./api
+          publish_dir: ./_site
           publish_branch: v1
-          destination_dir: v1
           force_orphan: true
 
       - name: Commit version date to master
