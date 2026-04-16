@@ -101,24 +101,13 @@ jobs:
           else
              echo "No new version detected, exiting, bye."
           fi
-      - name: Backup current v1 branch
-        run: |
-          if git ls-remote --exit-code origin v1 > /dev/null 2>&1; then
-            git fetch origin v1
-            git push origin origin/v1:refs/heads/v1-backup --force
-          else
-            echo "No existing v1 branch, skipping backup."
-          fi
-
       - name: Deploy API to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./api
           publish_branch: v1
-          destination_dir: v1
           force_orphan: true
-          cname: wca-api.robiningelbrecht.be
 
       - name: Commit version date to master
         run: |
