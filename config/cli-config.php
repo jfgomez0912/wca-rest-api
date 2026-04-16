@@ -9,7 +9,7 @@ use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 
-/** @var \DI\Container $container */
+/** @var DI\Container $container */
 $container = ContainerFactory::create();
 
 return DependencyFactory::fromEntityManager(

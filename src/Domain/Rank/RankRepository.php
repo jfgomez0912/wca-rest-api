@@ -9,7 +9,7 @@ use Doctrine\DBAL\Connection;
 readonly class RankRepository
 {
     public function __construct(
-        private Connection $connection
+        private Connection $connection,
     ) {
     }
 
@@ -18,7 +18,7 @@ readonly class RankRepository
         RankType $rankType,
         RegionType $regionType,
         string $eventId,
-        string $region = null
+        ?string $region = null,
     ): Overview {
         $queryBuilder = $this->connection->createQueryBuilder();
 
@@ -77,7 +77,7 @@ readonly class RankRepository
     }
 
     /**
-     * @return \App\Domain\Rank\Rank[]
+     * @return Rank[]
      */
     public function findByPerson(string $personId): array
     {

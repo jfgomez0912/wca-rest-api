@@ -14,7 +14,7 @@ readonly class BuildContinentApiCommandHandler implements CommandHandler
 {
     public function __construct(
         private ContinentRepository $continentRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

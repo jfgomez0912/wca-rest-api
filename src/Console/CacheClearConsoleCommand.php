@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CacheClearConsoleCommand extends Command
 {
     public function __construct(
-        private readonly Settings $settings
+        private readonly Settings $settings,
     ) {
         parent::__construct();
     }

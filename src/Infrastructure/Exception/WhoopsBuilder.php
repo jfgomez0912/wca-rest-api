@@ -11,7 +11,7 @@ use Whoops\Run;
 readonly class WhoopsBuilder
 {
     private function __construct(
-        private HandlerInterface $handler
+        private HandlerInterface $handler,
     ) {
     }
 

@@ -11,7 +11,7 @@ class DefaultHtmlErrorRenderer extends HtmlErrorRendererBase
     protected string $defaultErrorTitle = 'Waw, this is embarrassing';
 
     public function __construct(
-        private readonly Environment $twig
+        private readonly Environment $twig,
     ) {
     }
 

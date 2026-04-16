@@ -19,7 +19,7 @@ readonly class BuildResultApiCommandHandler implements CommandHandler
     public function __construct(
         private ResultRepository $resultRepository,
         private CompetitionRepository $competitionRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

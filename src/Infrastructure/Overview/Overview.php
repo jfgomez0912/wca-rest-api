@@ -4,7 +4,7 @@ namespace App\Infrastructure\Overview;
 
 class Overview implements \JsonSerializable
 {
-    /** @var \App\Infrastructure\Overview\Item[] */
+    /** @var Item[] */
     private array $items = [];
 
     private function __construct(
@@ -38,7 +38,7 @@ class Overview implements \JsonSerializable
     }
 
     /**
-     * @return \App\Infrastructure\Overview\Item[]
+     * @return Item[]
      */
     public function getItems(): array
     {

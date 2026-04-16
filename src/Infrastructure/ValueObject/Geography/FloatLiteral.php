@@ -5,7 +5,7 @@ namespace App\Infrastructure\ValueObject\Geography;
 class FloatLiteral implements \JsonSerializable
 {
     public function __construct(
-        private readonly float $float
+        private readonly float $float,
     ) {
     }
 

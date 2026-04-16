@@ -9,7 +9,7 @@ use Doctrine\DBAL\Connection;
 readonly class CountryRepository
 {
     public function __construct(
-        private Connection $connection
+        private Connection $connection,
     ) {
     }
 

@@ -43,8 +43,8 @@ readonly class Competition implements Item
         array $wcaDelegates,
         Venue $venue,
         array $organisers = [],
-        string $information = null,
-        string $externalWebsite = null,
+        ?string $information = null,
+        ?string $externalWebsite = null,
     ): self {
         return new self(
             id: $id,

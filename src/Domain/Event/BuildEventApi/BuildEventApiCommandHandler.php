@@ -14,7 +14,7 @@ readonly class BuildEventApiCommandHandler implements CommandHandler
 {
     public function __construct(
         private EventRepository $eventRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

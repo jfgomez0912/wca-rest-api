@@ -20,7 +20,7 @@ readonly class BuildCompetitionApiCommandHandler implements CommandHandler
         private CompetitionRepository $competitionRepository,
         private CountryRepository $countryRepository,
         private EventRepository $eventRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

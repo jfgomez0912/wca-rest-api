@@ -19,7 +19,7 @@ readonly class BuildChampionshipApiCommandHandler implements CommandHandler
         private ChampionshipRepository $championshipRepository,
         private CountryRepository $countryRepository,
         private ContinentRepository $continentRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

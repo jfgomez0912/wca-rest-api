@@ -9,7 +9,7 @@ use App\Infrastructure\ValueObject\Time\SerializableDateTime;
 class UpdateApiVersion extends DomainCommand
 {
     public function __construct(
-        private readonly string $versionInfo
+        private readonly string $versionInfo,
     ) {
     }
 

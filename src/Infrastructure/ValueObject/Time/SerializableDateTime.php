@@ -9,7 +9,7 @@ class SerializableDateTime extends \DateTimeImmutable implements \JsonSerializab
         return new self($string);
     }
 
-    public static function fromOptionalString(string $string = null): ?SerializableDateTime
+    public static function fromOptionalString(?string $string = null): ?SerializableDateTime
     {
         return $string ? self::fromString($string) : null;
     }

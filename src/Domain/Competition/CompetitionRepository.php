@@ -15,17 +15,17 @@ use Doctrine\DBAL\Connection;
 readonly class CompetitionRepository
 {
     public function __construct(
-        private Connection $connection
+        private Connection $connection,
     ) {
     }
 
     public function findOneBy(
         Pagination $pagination,
-        Country $country = null,
-        int $year = null,
-        int $month = null,
-        int $day = null,
-        string $eventId = null,
+        ?Country $country = null,
+        ?int $year = null,
+        ?int $month = null,
+        ?int $day = null,
+        ?string $eventId = null,
     ): Overview {
         $queryBuilder = $this->connection->createQueryBuilder();
 

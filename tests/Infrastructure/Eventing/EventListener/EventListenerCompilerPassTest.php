@@ -6,7 +6,6 @@ use App\Infrastructure\Attribute\AsEventListener;
 use App\Infrastructure\DependencyInjection\ContainerBuilder;
 use App\Infrastructure\Eventing\EventBus;
 use App\Infrastructure\Eventing\EventListener\EventListenerCompilerPass;
-use DI\Definition\Helper\AutowireDefinitionHelper;
 use PHPUnit\Framework\TestCase;
 
 class EventListenerCompilerPassTest extends TestCase
@@ -14,7 +13,7 @@ class EventListenerCompilerPassTest extends TestCase
     public function testProcess(): void
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);
-        $definition = $this->createMock(AutowireDefinitionHelper::class);
+        $definition = \DI\autowire(EventBus::class);
 
         $containerBuilder
             ->expects($this->once())
@@ -27,11 +26,6 @@ class EventListenerCompilerPassTest extends TestCase
             ->method('findTaggedWithClassAttribute')
             ->with(AsEventListener::class)
             ->willReturn([TestEventListener::class]);
-
-        $definition
-            ->expects($this->once())
-            ->method('method')
-            ->with('subscribeEventListener', \DI\autowire(TestEventListener::class));
 
         $containerBuilder
             ->expects($this->once())

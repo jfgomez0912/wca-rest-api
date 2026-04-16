@@ -26,8 +26,6 @@ class EventBusTest extends ContainerTestCase
         $eventListenerTwo = $this->getMockBuilder(EventListener::class)
             ->disableOriginalConstructor()
             ->disableOriginalClone()
-            ->disableArgumentCloning()
-            ->disallowMockingUnknownTypes()
             ->setMockClassName('TestEventListener')
             ->getMock();
 

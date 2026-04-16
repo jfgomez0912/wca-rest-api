@@ -12,7 +12,7 @@ use App\Infrastructure\Environment\Settings;
 readonly class UpdateApiVersionCommandHandler implements CommandHandler
 {
     public function __construct(
-        private VersionRepository $versionRepository
+        private VersionRepository $versionRepository,
     ) {
     }
 

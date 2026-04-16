@@ -7,7 +7,7 @@ use Ausi\SlugGenerator\SlugGenerator;
 readonly class Slug implements \Stringable, \JsonSerializable
 {
     private function __construct(
-        private string $slug
+        private string $slug,
     ) {
     }
 

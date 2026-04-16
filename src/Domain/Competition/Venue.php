@@ -16,9 +16,9 @@ readonly class Venue implements \JsonSerializable
 
     public static function fromValues(
         string $name,
-        string $address = null,
-        string $details = null,
-        Coordinates $coordinates = null,
+        ?string $address = null,
+        ?string $details = null,
+        ?Coordinates $coordinates = null,
     ): self {
         return new self(
             $name,

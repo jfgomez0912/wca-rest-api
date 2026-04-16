@@ -12,7 +12,7 @@ use Slim\App;
 abstract class WebTestCase extends TestCase
 {
     private App $app;
-    /** @var \DI\Container */
+    /** @var Container */
     private ContainerInterface $container;
 
     protected function createRequest(string $method, string $uri, array $serverParams = []): ServerRequestInterface

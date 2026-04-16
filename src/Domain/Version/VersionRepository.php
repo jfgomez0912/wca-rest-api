@@ -7,7 +7,7 @@ use App\Domain\FileWriter;
 readonly class VersionRepository
 {
     public function __construct(
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

@@ -22,7 +22,7 @@ readonly class BuildRankApiCommandHandler implements CommandHandler
         private RankRepository $rankRepository,
         private EventRepository $eventRepository,
         private ContinentRepository $continentRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

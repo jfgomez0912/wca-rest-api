@@ -102,8 +102,6 @@ class ContainerBuilderTest extends TestCase
         $compilerPass = $this->getMockBuilder(CompilerPass::class)
             ->disableOriginalConstructor()
             ->disableOriginalClone()
-            ->disableArgumentCloning()
-            ->disallowMockingUnknownTypes()
             ->setMockClassName('CompilerPassOne')
             ->getMock();
 

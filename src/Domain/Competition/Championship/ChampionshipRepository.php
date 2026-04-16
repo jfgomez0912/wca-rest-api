@@ -17,7 +17,7 @@ readonly class ChampionshipRepository
 
     public function findOneBy(
         Pagination $pagination,
-        string $championshipType = null
+        ?string $championshipType = null,
     ): Overview {
         $queryBuilder = $this->connection->createQueryBuilder();
 

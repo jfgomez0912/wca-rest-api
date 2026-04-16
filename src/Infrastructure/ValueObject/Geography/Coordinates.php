@@ -12,7 +12,7 @@ readonly class Coordinates implements \JsonSerializable
 
     public static function fromIntegers(
         int $latitude,
-        int $longitude
+        int $longitude,
     ): self {
         return new self(
             Latitude::fromString((string) ($latitude / 1000000)),

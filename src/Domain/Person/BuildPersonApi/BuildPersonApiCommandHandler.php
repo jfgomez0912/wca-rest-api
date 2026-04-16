@@ -15,7 +15,7 @@ readonly class BuildPersonApiCommandHandler implements CommandHandler
 {
     public function __construct(
         private PersonRepository $personRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

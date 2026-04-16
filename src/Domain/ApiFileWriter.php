@@ -9,7 +9,7 @@ use League\Flysystem\Filesystem;
 readonly class ApiFileWriter implements FileWriter
 {
     public function __construct(
-        private Filesystem $filesystem
+        private Filesystem $filesystem,
     ) {
     }
 

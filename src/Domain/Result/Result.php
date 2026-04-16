@@ -37,8 +37,8 @@ readonly class Result implements Item
         int $average,
         string $format,
         array $solves,
-        Record $singleRecord = null,
-        Record $averageRecord = null,
+        ?Record $singleRecord = null,
+        ?Record $averageRecord = null,
     ): self {
         return new self(
             competitionId: $competitionId,

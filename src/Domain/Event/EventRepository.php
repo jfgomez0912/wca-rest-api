@@ -9,7 +9,7 @@ use Doctrine\DBAL\Connection;
 readonly class EventRepository
 {
     public function __construct(
-        private Connection $connection
+        private Connection $connection,
     ) {
     }
 

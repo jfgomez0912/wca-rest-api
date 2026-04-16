@@ -10,7 +10,7 @@ enum Record: string
     case CR = 'CR';
     case NR = 'NR';
 
-    public static function tryFromMap(string $value = null): ?self
+    public static function tryFromMap(?string $value = null): ?self
     {
         if (!$value) {
             return null;

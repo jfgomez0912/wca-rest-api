@@ -14,7 +14,7 @@ readonly class BuildCountryApiCommandHandler implements CommandHandler
 {
     public function __construct(
         private CountryRepository $countryRepository,
-        private FileWriter $apiFileWriter
+        private FileWriter $apiFileWriter,
     ) {
     }
 

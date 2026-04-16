@@ -8,7 +8,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 trait ProgressAwareDomainCommand
 {
     public function __construct(
-        private readonly Progress $progress
+        private readonly Progress $progress,
     ) {
     }
 

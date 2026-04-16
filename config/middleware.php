@@ -16,7 +16,7 @@ return function (App $app) {
         $settings->get('slim.logErrorDetails'),
     );
 
-    /** @var \Slim\Handlers\ErrorHandler $errorHandler */
+    /** @var Slim\Handlers\ErrorHandler $errorHandler */
     $errorHandler = $errorMiddleware->getDefaultErrorHandler();
     if (!$settings->get('slim.whoops.enabled')) {
         $errorHandler->registerErrorRenderer('text/html', DefaultHtmlErrorRenderer::class);

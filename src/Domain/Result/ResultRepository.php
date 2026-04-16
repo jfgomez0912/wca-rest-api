@@ -9,13 +9,13 @@ use Doctrine\DBAL\Connection;
 readonly class ResultRepository
 {
     public function __construct(
-        private Connection $connection
+        private Connection $connection,
     ) {
     }
 
     public function findOneBy(
         string $competitionId,
-        string $eventId = null,
+        ?string $eventId = null,
     ): Overview {
         $queryBuilder = $this->connection->createQueryBuilder();
         $queryBuilder->select('r.*, rt.name as roundName, rt.final as isFinalRound, f.name as formatName')
@@ -63,7 +63,7 @@ readonly class ResultRepository
     }
 
     /**
-     * @return \App\Domain\Result\Result[]
+     * @return Result[]
      */
     public function findByPerson(string $personId): array
     {
