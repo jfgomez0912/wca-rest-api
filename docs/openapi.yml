@@ -63,7 +63,7 @@ externalDocs:
   description: The source code of the API
   url: https://github.com/robiningelbrecht/wca-rest-api
 servers:
-  - url: https://wca-api.robiningelbrecht.be/v1
+  - url: https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1
 x-tagGroups:
   - name: API
     tags:
@@ -157,10 +157,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/continents.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/continents.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/continents.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/continents.json');
             echo $response->getBody()->getContent();
   /api/countries.json:
     get:
@@ -179,10 +179,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/countries.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/countries.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/countries.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/countries.json');
             echo $response->getBody()->getContent();
   /api/events.json:
     get:
@@ -201,10 +201,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/events.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/events.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/events.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/events.json');
             echo $response->getBody()->getContent();
   /api/competitions{-page-[0-9]}.json:
     get:
@@ -231,11 +231,11 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions.json'
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions-page-2.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions-page-2.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions.json');
             echo $response->getBody()->getContent();
   /api/competitions/{country}.json:
     get:
@@ -262,10 +262,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/BE.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/BE.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions/BE.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/BE.json');
             echo $response->getBody()->getContent();
   /api/competitions/{year}.json:
     get:
@@ -292,10 +292,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/2023.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions/2023.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023.json');
             echo $response->getBody()->getContent();
   /api/competitions/{year}/{month}.json:
     get:
@@ -341,10 +341,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/2023/08.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023/08.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions/2023/08.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023/08.json');
             echo $response->getBody()->getContent();
   /api/competitions/{year}/{month}/{day}.json:
     get:
@@ -400,10 +400,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/2023/08/13.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023/08/13.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions/2023/09/13.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023/09/13.json');
             echo $response->getBody()->getContent();
   /api/competitions/{event}{-page-[0-9]}.json:
     get:
@@ -437,11 +437,11 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/333.json'
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/333-page-2.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/333.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/333-page-2.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions/333.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/333.json');
             echo $response->getBody()->getContent();
   /api/competitions/{id}.json:
     get:
@@ -468,10 +468,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/competitions/BrizZonSylwesterOpen2022.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/BrizZonSylwesterOpen2022.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/competitions/BrizZonSylwesterOpen2022.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/BrizZonSylwesterOpen2022.json');
             echo $response->getBody()->getContent();
   /api/championships{-page-[0-9]}.json:
     get:
@@ -498,11 +498,11 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/championships.json'
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/championships-page-1.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships-page-1.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/championships.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships.json');
             echo $response->getBody()->getContent();
   /api/championships/{type}.json:
     get:
@@ -529,10 +529,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/championships/world.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships/world.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/championships/world.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships/world.json');
             echo $response->getBody()->getContent();
   /api/championships/{id}.json:
     get:
@@ -559,10 +559,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/championships/WC2023.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships/WC2023.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/championships/WC2023.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships/WC2023.json');
             echo $response->getBody()->getContent();
   /api/persons{-page-[0-9]}.json:
     get:
@@ -589,11 +589,11 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/persons.json'
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/persons-page-2.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons-page-2.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/persons.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons.json');
             echo $response->getBody()->getContent();
   /api/persons/{id}.json:
     get:
@@ -620,10 +620,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/persons/2012PARK03.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons/2012PARK03.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/persons/2012PARK03.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons/2012PARK03.json');
             echo $response->getBody()->getContent();
   /api/rank/{region}/{type}/{event}.json:
     get:
@@ -667,12 +667,12 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/rank/world/single/333.json'
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/rank/BE/average/222.json'
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/rank/europe/single/444.json''
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/rank/world/single/333.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/rank/BE/average/222.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/rank/europe/single/444.json''
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/rank/world/single/333.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/rank/world/single/333.json');
             echo $response->getBody()->getContent();
   /api/results/{competition}.json:
     get:
@@ -699,10 +699,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/results/BrizZonSylwesterOpen2022.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/results/BrizZonSylwesterOpen2022.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/results/BrizZonSylwesterOpen2022.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/results/BrizZonSylwesterOpen2022.json');
             echo $response->getBody()->getContent();
   /api/results/{competition}/{event}.json:
     get:
@@ -736,10 +736,10 @@ paths:
       x-code-samples:
         - lang: 'cURL'
           source: |
-            curl --location 'https://wca-api.robiningelbrecht.be/v1/results/BrizZonSylwesterOpen2023/333.json'
+            curl --location 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/results/BrizZonSylwesterOpen2023/333.json'
         - lang: PHP - Guzzle
           source: |
-            $response = (new Client())->request('GET', 'https://wca-api.robiningelbrecht.be/v1/results/BrizZonSylwesterOpen2023/333.json');
+            $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/results/BrizZonSylwesterOpen2023/333.json');
             echo $response->getBody()->getContent();
 components:
   schemas:
