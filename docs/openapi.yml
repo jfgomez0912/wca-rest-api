@@ -63,7 +63,7 @@ externalDocs:
   description: The source code of the API
   url: https://github.com/robiningelbrecht/wca-rest-api
 servers:
-  - url: https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1
+  - url: https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads
 x-tagGroups:
   - name: API
     tags:
@@ -139,7 +139,7 @@ tags:
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/Result" />
 paths:
-  /api/continents.json:
+  /v1/continents.json:
     get:
       tags:
         - general
@@ -162,7 +162,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/continents.json');
             echo $response->getBody()->getContent();
-  /api/countries.json:
+  /v1/countries.json:
     get:
       tags:
         - general
@@ -184,7 +184,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/countries.json');
             echo $response->getBody()->getContent();
-  /api/events.json:
+  /v1/events.json:
     get:
       tags:
         - general
@@ -206,7 +206,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/events.json');
             echo $response->getBody()->getContent();
-  /api/competitions{-page-[0-9]}.json:
+  /v1/competitions{-page-[0-9]}.json:
     get:
       tags:
         - competition
@@ -237,7 +237,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions.json');
             echo $response->getBody()->getContent();
-  /api/competitions/{country}.json:
+  /v1/competitions/{country}.json:
     get:
       tags:
         - competition
@@ -247,7 +247,7 @@ paths:
       parameters:
         - name: country
           in: path
-          description: The country to filter the competitions on. For a list of valid countries, check `/api/countries.json`
+          description: The country to filter the competitions on. For a list of valid countries, check `/v1/countries.json`
           required: true
           schema:
             type: string
@@ -267,7 +267,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/BE.json');
             echo $response->getBody()->getContent();
-  /api/competitions/{year}.json:
+  /v1/competitions/{year}.json:
     get:
       tags:
         - competition
@@ -297,7 +297,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023.json');
             echo $response->getBody()->getContent();
-  /api/competitions/{year}/{month}.json:
+  /v1/competitions/{year}/{month}.json:
     get:
       tags:
         - competition
@@ -346,7 +346,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023/08.json');
             echo $response->getBody()->getContent();
-  /api/competitions/{year}/{month}/{day}.json:
+  /v1/competitions/{year}/{month}/{day}.json:
     get:
       tags:
         - competition
@@ -405,7 +405,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/2023/09/13.json');
             echo $response->getBody()->getContent();
-  /api/competitions/{event}{-page-[0-9]}.json:
+  /v1/competitions/{event}{-page-[0-9]}.json:
     get:
       tags:
         - competition
@@ -415,7 +415,7 @@ paths:
       parameters:
         - name: event
           in: path
-          description: The event to filter the competitions on. For a list of valid events, check `/api/events.json`
+          description: The event to filter the competitions on. For a list of valid events, check `/v1/events.json`
           required: true
           schema:
             type: string
@@ -443,7 +443,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/333.json');
             echo $response->getBody()->getContent();
-  /api/competitions/{id}.json:
+  /v1/competitions/{id}.json:
     get:
       tags:
         - competition
@@ -473,7 +473,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/competitions/BrizZonSylwesterOpen2022.json');
             echo $response->getBody()->getContent();
-  /api/championships{-page-[0-9]}.json:
+  /v1/championships{-page-[0-9]}.json:
     get:
       tags:
         - championship
@@ -504,7 +504,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships.json');
             echo $response->getBody()->getContent();
-  /api/championships/{type}.json:
+  /v1/championships/{type}.json:
     get:
       tags:
         - championship
@@ -534,7 +534,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships/world.json');
             echo $response->getBody()->getContent();
-  /api/championships/{id}.json:
+  /v1/championships/{id}.json:
     get:
       tags:
         - championship
@@ -564,7 +564,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/championships/WC2023.json');
             echo $response->getBody()->getContent();
-  /api/persons{-page-[0-9]}.json:
+  /v1/persons{-page-[0-9]}.json:
     get:
       tags:
         - person
@@ -595,7 +595,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons.json');
             echo $response->getBody()->getContent();
-  /api/persons/{id}.json:
+  /v1/persons/{id}.json:
     get:
       tags:
         - person
@@ -625,7 +625,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/persons/2012PARK03.json');
             echo $response->getBody()->getContent();
-  /api/rank/{region}/{type}/{event}.json:
+  /v1/rank/{region}/{type}/{event}.json:
     get:
       tags:
         - rank
@@ -652,7 +652,7 @@ paths:
               - average
         - name: event
           in: path
-          description: The event to filter the rankings on. For a list of valid events, check `/api/events.json`
+          description: The event to filter the rankings on. For a list of valid events, check `/v1/events.json`
           required: true
           schema:
             type: string
@@ -674,7 +674,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/rank/world/single/333.json');
             echo $response->getBody()->getContent();
-  /api/results/{competition}.json:
+  /v1/results/{competition}.json:
     get:
       tags:
         - result
@@ -704,7 +704,7 @@ paths:
           source: |
             $response = (new Client())->request('GET', 'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/refs/heads/v1/results/BrizZonSylwesterOpen2022.json');
             echo $response->getBody()->getContent();
-  /api/results/{competition}/{event}.json:
+  /v1/results/{competition}/{event}.json:
     get:
       tags:
         - result
